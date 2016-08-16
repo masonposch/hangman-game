@@ -23,6 +23,12 @@ var wins = 0;
 
 var computerWordChoice = wordBank[Math.floor(Math.random()*wordBank.length)];
 
+var globalUserGuess = "";
+
+var officialGameWordHidden = "";
+var gameWordArray = "";
+
+
 
 var startGame = function(){
 		// create array or computerword choice
@@ -30,6 +36,15 @@ var startGame = function(){
 		var wordSplit = computerWordChoice.split("");
 		console.log(wordSplit);
 		var gameWordHidden = [];
+		for(var i=0; i < wordSplit.length; i++){
+			if(wordSplit.indexOf(globalUserGuess) === -1){
+				gameWordHidden.push("_ ");
+			}
+		}
+		console.log(gameWordHidden);
+		//Make these into global variables
+		window.gameWordHidden = officialGameWordHidden;
+		window.wordSplit = gameWordArray;
 	}
 
 startGame();
@@ -39,20 +54,12 @@ startGame();
 // PLAYER STARTS THE GAME
 document.onkeyup = function(event) {
 
+	
 	// Determines which exact key was selected. Make it lowercase
-	// var computerWordChoice = wordBank[Math.floor(Math.random()*wordBank.length)];
-
-	// var randomWordLength = computerWordChoice.length;
-
 	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
 
-	var guessedLetters = function(theChoice) {
-		// for(var i=0; i < wordOfTheGame.length; i++){
-		// 	if(theChoice === wordOfTheGame[i]){
-		// 		console.log(theChoice + " is a correct guess");
-		// 	}
-		// }	
+	var guessedLetters = function(theChoice) {	
 			if(previouslyGuessed.indexOf(theChoice) === -1){
 				console.log(theChoice);
 				lettersLeft--;
@@ -66,12 +73,14 @@ document.onkeyup = function(event) {
 				console.log("You already guessed this");
 				console.log("Guesses remaining: " + lettersLeft);
 			}
+
 			previouslyGuessed.push(theChoice);
 
 		}
 
 	//Displays the letters that have been guessed
 	guessedLetters(userGuess);
+	window.userGuess = globalUserGuess;
 
 }
 
