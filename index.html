@@ -21,21 +21,21 @@ var lettersLeft = 10;
 
 var wins = 0;
 
-var underscores = "";
-
 var computerWordChoice = wordBank[Math.floor(Math.random()*wordBank.length)];
 
 
-
-
-
-//Computer chooses the word for the game to play off of
-var startGame = function(theWord){
-		theWord;
-		console.log(theWord.replace(/./g,"_ "));
+var startGame = function(){
+		// create array or computerword choice
+		// make blank array with same length
+		var wordSplit = computerWordChoice.split("");
+		console.log(wordSplit);
+		var gameWordHidden = [];
 	}
 
-startGame(computerWordChoice);
+startGame();
+
+
+
 // PLAYER STARTS THE GAME
 document.onkeyup = function(event) {
 
