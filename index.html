@@ -13,7 +13,7 @@
 
 var wordBank = ['birdman', 'starwars', 'hook', 'scream', 'argo', 'goodfellas', 'jumanji', 'frozen', 'gravity', 'skyfall', 'twister', 'fargo'];
 
-var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
 var previouslyGuessed = [];
 
@@ -32,16 +32,22 @@ document.onkeyup = function(event) {
 	var guessedLetters = function(theChoice) {
 			if(previouslyGuessed.indexOf(theChoice) === -1){
 				console.log(theChoice);
+				lettersLeft--;
+				console.log("Guesses remaining: " + lettersLeft);
+				if (lettersLeft === 0) {
+					console.log("You lose. Start over.");
+					confirm("You lose. Would you like to play again?");
+					window.location.reload();
+				}
 			} else {
 				console.log("You already guessed this");
+				console.log("Guesses remaining: " + lettersLeft);
 			}
 			previouslyGuessed.push(theChoice);
 		}
 
 	//Displays the letters that have been guessed
 	guessedLetters(userGuess);
-
-
 
 }
 
