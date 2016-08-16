@@ -19,6 +19,10 @@ var previouslyGuessed = [];
 
 var lettersLeft = 10;
 
+var wins = 0;
+
+var underscores = "";
+
 
 
 // PLAYER STARTS THE GAME
@@ -27,14 +31,30 @@ document.onkeyup = function(event) {
 	// Determines which exact key was selected. Make it lowercase
 	var computerWordChoice = wordBank[Math.floor(Math.random()*wordBank.length)];
 
+	// var randomWordLength = computerWordChoice.length;
+
 	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+	var startGame = function(theWord){
+		var randomWordLength = theWord.length;
+		if(lettersLeft === 10){
+			theWord;
+			console.log(theWord);
+			if (theWord){
+				theWord = theWord.replace(/./g,"_ ");
+				console.log(theWord);
+			}
+		}
+	}
+
+	startGame(computerWordChoice);
 
 	var guessedLetters = function(theChoice) {
 			if(previouslyGuessed.indexOf(theChoice) === -1){
 				console.log(theChoice);
 				lettersLeft--;
 				console.log("Guesses remaining: " + lettersLeft);
-				if (lettersLeft === 0) {
+				if (lettersLeft <= 0) {
 					console.log("You lose. Start over.");
 					confirm("You lose. Would you like to play again?");
 					window.location.reload();
@@ -59,6 +79,20 @@ document.onkeyup = function(event) {
 </head>
 
 <body>
+
+	<h1>Guess the movie. Or hang.</h1>
+
+	<h2>Press any key to make your first guess</h2>
+
+	<h3>Wins:</h3>
+
+	<h3>Current Word</h3>
+
+	<h4>This is the current word.</h4>
+
+	<p>Remaining guesses</p>
+
+	<h4>Letters you've already guessed:</h4>
 
 
 
