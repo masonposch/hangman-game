@@ -28,25 +28,24 @@ var globalUserGuess = "";
 var officialGameWordHidden = "";
 var gameWordArray = "";
 
-
+var wordSplit;
+var gameWordHidden = [];
 
 var startGame = function(){
 		// create array or computerword choice
 		// make blank array with same length
-		var wordSplit = computerWordChoice.split("");
+		wordSplit = "";
+		wordSplit = computerWordChoice.split("");
 		console.log(wordSplit);
-		var gameWordHidden = [];
+		gameWordHidden = [];
 		for(var i=0; i < wordSplit.length; i++){
-			if(wordSplit.indexOf(globalUserGuess) === -1){
-				gameWordHidden.push("_ ");
-			}
+				gameWordHidden.push("_");
 		}
 		console.log(gameWordHidden);
 		//Make these into global variables
-		window.gameWordHidden = officialGameWordHidden;
-		window.wordSplit = gameWordArray;
+		// window.gameWordHidden = officialGameWordHidden;
+		// window.wordSplit = gameWordArray;
 	}
-
 startGame();
 
 
@@ -61,6 +60,15 @@ document.onkeyup = function(event) {
 
 	var guessedLetters = function(theChoice) {	
 			if(previouslyGuessed.indexOf(theChoice) === -1){
+				if(wordSplit.indexOf(theChoice) === -1){
+					console.log(gameWordHidden);
+				} else {
+						var correctGuess = wordSplit.indexOf(theChoice);
+						gameWordHidden[correctGuess] = theChoice;
+						console.log(gameWordHidden); 
+					}
+					
+				}
 				console.log(theChoice);
 				lettersLeft--;
 				console.log("Guesses remaining: " + lettersLeft);
@@ -69,9 +77,10 @@ document.onkeyup = function(event) {
 					confirm("You lose. Would you like to play again?");
 					window.location.reload();
 				}
-			} else {
+			 else {
 				console.log("You already guessed this");
 				console.log("Guesses remaining: " + lettersLeft);
+
 			}
 
 			previouslyGuessed.push(theChoice);
@@ -80,7 +89,7 @@ document.onkeyup = function(event) {
 
 	//Displays the letters that have been guessed
 	guessedLetters(userGuess);
-	window.userGuess = globalUserGuess;
+	window.playerChoice = globalUserGuess;
 
 }
 
@@ -112,3 +121,12 @@ document.onkeyup = function(event) {
 </body>
 
 </html>
+
+
+
+
+
+<!-- var correctGuess = (wordSplit.indexOf(theChoice));
+					for(var i=0; i<correctGuess.length; i++){
+						gameWordHidden.replaceAt(correctGuess, theChoice);
+						console.log(gameWordHidden); -->
