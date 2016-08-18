@@ -11,13 +11,11 @@
 
 <script type="text/javascript">
 
-var wordBank = ['birdman', 'starwars', 'hook', 'scream', 'argo', 'goodfellas', 'jumanji', 'frozen', 'gravity', 'skyfall', 'twister', 'fargo'];
-
-var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var wordBank = ['birdman', 'fight club', 'the matrix', 'scream', 'argo', 'rocky', 'psycho', 'frozen', 'gravity', 'jaws', 'alien', 'fargo', 'up', 'casino'];
 
 var previouslyGuessed = [];
 
-var lettersLeft = 10;
+var lettersLeft = 15;
 
 var wins = 0;
 
@@ -72,7 +70,15 @@ document.onkeyup = function(event) {
 					//Finds the blank position within the hidden word of where the correct letter should be and replaces it with the user's correct guess 
 					gameWordHidden[correctGuess] = theChoice;
 					//Show's the current (at least partially revealed) state of the hidden word, however revealed it may be.
-					console.log(gameWordHidden); 
+					console.log(gameWordHidden);
+					//If there are no longer any blanks available because the user has guessed everything correctly...
+					if(gameWordHidden.indexOf("_") === -1){
+						//Informs the user (in the log) that they have won.
+						console.log("You win!");
+						wins++;
+						confirm("You've won! Would you like to play again?");
+						window.location.reload();
+					} 
 			}//Ends the nested else statement
 		//If the user's guess actually has already been guessed.			
 		} else{
