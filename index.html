@@ -6,7 +6,8 @@
 
 	<title>Mason's Hangman Game</title>
 
-	<link rel=StyleSheet href="CSS/reset.css" type="text/css" media=screen>
+	<!--Bootstrap Link--><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><!--Bootstrap Link-->
+
 	<link rel=StyleSheet href="CSS/style.css" type="text/css" media=screen>
 
 <script type="text/javascript">
@@ -131,21 +132,89 @@ document.onkeyup = function(event) {
 
 <body>
 
-	<h1>Guess the movie. Or hang.</h1>
+<div class="container"><!--Begin container class for the entire page-->
 
-	<h2>Press any key to make your first guess</h2>
+	<div class="row"><!--Begin row for the title-->
 
-	<h3>Wins:</h3>
+		<div class=" text-center col-xs-12 col-sm-12 col-md-12 col-lg-12"><!--Title columns-->
 
-	<h3>Current Word</h3>
+			<h1>Guess the movie. Or hang.</h1>
 
-	<h4>This is the current word.</h4>
+		</div><!--End Title columns-->
 
-	<p>Remaining guesses</p>
+	</div><!--End Title row-->
 
-	<h4>Letters you've already guessed:</h4>
+	<div class="row"><!--Begin row for the subtitle-->
 
+		<div class=" text-center col-xs-12 col-sm-12 col-md-12 col-lg-12"><!--Title columns-->
 
+			<h2>Press any key to make your first guess</h2>
+
+		</div><!--End Subtitle columns-->
+
+	</div><!--End Subtitle row-->
+
+	<div class="row"><!--Begin row for the wins-->
+
+		<div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12"><!--Title columns-->
+
+			<h3 id="wins">Wins:</h3>
+
+		</div><!--wins columns-->
+
+	</div><!--End wins row-->
+
+	<div class="row"><!--Begin row for the game content box-->
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><!--Game content box columns-->
+
+			<div class="row">
+
+				<div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+					<h3>Current Word</h3>
+
+				</div>
+
+			</div>
+
+			<div class="row">
+
+				<div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+					<h4 id="currentWord">This is the current word.</h4>
+
+				</div>
+
+			</div>
+
+			<div class="row">
+
+				<div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+					<p id="guessesRemaining">Remaining guesses</p>
+
+				</div>
+
+			</div>
+
+			<div class="row">
+
+				<div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+					<h4 id="alreadyGuessed">Letters you've already guessed:</h4>
+
+				</div>
+
+			</div>
+
+		</div><!--End game content box columns-->
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+
+	</div><!--End row for the game content box-->
+
+</div><!--End container class-->
 
 </body>
 
