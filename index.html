@@ -18,11 +18,14 @@
 
 var wordBank = ['birdman', 'fight club', 'the matrix', 'scream', 'argo', 'rocky', 'psycho', 'frozen', 'gravity', 'jaws', 'alien', 'fargo', 'up', 'casino'];
 
+var wins = 0;
+
+
+var initializeHangman = function(){
+
 var previouslyGuessed = [];
 
 var lettersLeft = 20;
-
-var wins = 0;
 
 var computerWordChoice = wordBank[Math.floor(Math.random()*wordBank.length)];
 
@@ -33,6 +36,7 @@ var gameWordArray = "";
 
 var wordSplit;
 var gameWordHidden = [];
+
 
 
 
@@ -82,9 +86,11 @@ var startGame = function(){
 					if(gameWordHidden.indexOf("_ ") === -1){
 						//Informs the user (in the log) that they have won.
 						wins++;
+						$("#wins").html("Wins: " + wins);
 						console.log("You win!");
 						confirm("You've won! Would you like to play again?");
-						window.location.reload();
+						initializeHangman();
+
 					} 
 			}//Ends the nested else statement
 		//If the user's guess actually has already been guessed.			
@@ -114,7 +120,7 @@ var startGame = function(){
 				//When the number of guesses remaining reaches 0 (or less), the user will be alerted
 				confirm("You lose. Would you like to play again?");
 				//When the user confirms the loss, the page will reload so that the game can begin again
-				window.location.reload();
+				initializeHangman();
 		//If the number of remaining guesses is still higher than 0...		
 		} else {
 			//Logs how many guesses are remaining. Because apparantley there are some.
@@ -136,7 +142,11 @@ var startGame = function(){
 
 }//Ends the onKeyUp function
 	}
-startGame();	
+startGame();
+
+}
+
+initializeHangman();	
 
 </script><!--End JavaScript-->
 
@@ -170,7 +180,7 @@ startGame();
 
 		<div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12"><!--Title columns-->
 
-			<h3 id="wins"></h3>
+			<h3 id="wins">Wins: </h3>
 
 		</div><!--wins columns-->
 
