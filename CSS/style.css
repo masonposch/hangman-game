@@ -1,0 +1,31 @@
+/*font-family: 'Comfortaa', cursive;*/
+/*font-family: 'Rubik One', sans-serif;*/
+
+
+
+body {
+	background-image: url(../assets/movie-theatre.png);
+	background-size: 100%;
+	color: #fff;
+}
+
+#theTitle, #currentWord {
+	font-family: 'Rubik One', sans-serif;
+	font-size: 80px;
+}
+
+#tagline, #guessWord, #guessesRemaining, #alreadyGuessed {
+	font-family: 'Comfortaa', cursive;
+}
+
+#alreadyGuessed {
+	font-size: 50px;
+}
+
+#tagline {
+	color: #696969;
+}
+
+#filler {
+	height: 50px;
+}

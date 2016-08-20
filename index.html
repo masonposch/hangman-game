@@ -10,6 +10,8 @@
 
 	<link rel=StyleSheet href="CSS/style.css" type="text/css" media=screen>
 
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa|Rubik+One" rel="stylesheet">
+
 	<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
 
 <script type="text/javascript">
@@ -18,7 +20,7 @@ var wordBank = ['birdman', 'fight club', 'the matrix', 'scream', 'argo', 'rocky'
 
 var previouslyGuessed = [];
 
-var lettersLeft = 15;
+var lettersLeft = 20;
 
 var wins = 0;
 
@@ -32,6 +34,8 @@ var gameWordArray = "";
 var wordSplit;
 var gameWordHidden = [];
 
+
+
 var startGame = function(){
 		// create array or computerword choice
 		// make blank array with same length
@@ -40,20 +44,14 @@ var startGame = function(){
 		console.log(wordSplit);
 		gameWordHidden = [];
 		for(var i=0; i < wordSplit.length; i++){
-				gameWordHidden.push("_");
+				gameWordHidden.push("_ ");
 		}
 		$("#currentWord").html(gameWordHidden);
 		console.log(gameWordHidden);
 		//Make these into global variables
 		// window.gameWordHidden = officialGameWordHidden;
 		// window.wordSplit = gameWordArray;
-	}
-startGame();
-
-
-
-// PLAYER STARTS THE GAME
-document.onkeyup = function(event) {
+	document.onkeyup = function(event) {
 
 	
 	// Determines which exact key was selected. Make it lowercase
@@ -72,7 +70,7 @@ document.onkeyup = function(event) {
 				console.log(gameWordHidden);
 			//The option for if it has not already been guessed and DOES exist within the Word of the Game	
 			} else {
-					$("#alreadyGuessed").html(previouslyGuessed + " ");
+					$("#alreadyGuessed").html(previouslyGuessed + "  ");
 					//Creates a new variable based off the position of the user's guess within the Word of the Game
 					var correctGuess = wordSplit.indexOf(theChoice);
 					//Finds the blank position within the hidden word of where the correct letter should be and replaces it with the user's correct guess 
@@ -81,10 +79,10 @@ document.onkeyup = function(event) {
 					$("#currentWord").html(gameWordHidden);
 					console.log(gameWordHidden);
 					//If there are no longer any blanks available because the user has guessed everything correctly...
-					if(gameWordHidden.indexOf("_") === -1){
+					if(gameWordHidden.indexOf("_ ") === -1){
 						//Informs the user (in the log) that they have won.
-						console.log("You win!");
 						wins++;
+						console.log("You win!");
 						confirm("You've won! Would you like to play again?");
 						window.location.reload();
 					} 
@@ -127,6 +125,9 @@ document.onkeyup = function(event) {
 
 		//This adds every letter that the user guesses into an array that is used to check if the user has guessed a particular letter before.
 		previouslyGuessed.push(theChoice);
+		if(previouslyGuessed.indexOf(theChoice)){
+			$("#alreadyGuessed").html(previouslyGuessed + " ");
+		}
 
 	}//Ends the guessedLetters function
 
@@ -134,6 +135,96 @@ document.onkeyup = function(event) {
 	guessedLetters(userGuess);
 
 }//Ends the onKeyUp function
+	}
+startGame();
+
+
+
+// PLAYER STARTS THE GAME
+// document.onkeyup = function(event) {
+
+	
+// 	// Determines which exact key was selected. Make it lowercase
+// 	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+
+// 	var guessedLetters = function(theChoice) {	
+// 		//Has the user's guess already been guessed? (As shown by the global variable, "previouslyGuessed")
+// 		if(previouslyGuessed.indexOf(theChoice) === -1){
+// 			//The option for if it has not already been guessed and the guess also DOES NOT exist within the Word of the Game
+// 			$("#alreadyGuessed").html(previouslyGuessed + " ");
+// 			if(wordSplit.indexOf(theChoice) === -1){
+// 				//Show's the current state of the hidden word, however revealed it may be.
+// 				$("#alreadyGuessed").html(previouslyGuessed + " ");
+// 				$("#currentWord").html(gameWordHidden);
+// 				console.log(gameWordHidden);
+// 			//The option for if it has not already been guessed and DOES exist within the Word of the Game	
+// 			} else {
+// 					$("#alreadyGuessed").html(previouslyGuessed + " ");
+// 					//Creates a new variable based off the position of the user's guess within the Word of the Game
+// 					var correctGuess = wordSplit.indexOf(theChoice);
+// 					//Finds the blank position within the hidden word of where the correct letter should be and replaces it with the user's correct guess 
+// 					gameWordHidden[correctGuess] = theChoice;
+// 					//Show's the current (at least partially revealed) state of the hidden word, however revealed it may be.
+// 					$("#currentWord").html(gameWordHidden);
+// 					console.log(gameWordHidden);
+// 					//If there are no longer any blanks available because the user has guessed everything correctly...
+// 					if(gameWordHidden.indexOf("_ ") === -1){
+// 						//Informs the user (in the log) that they have won.
+// 						wins++;
+// 						console.log("You win!");
+// 						confirm("You've won! Would you like to play again?");
+// 						window.location.reload();
+// 					} 
+// 			}//Ends the nested else statement
+// 		//If the user's guess actually has already been guessed.			
+// 		} else{
+// 			//Show's the current state of the hidden word, however revealed it may be.
+// 			$("#alreadyGuessed").html(previouslyGuessed + " ");
+// 			$("#currentWord").html(gameWordHidden);
+// 			console.log(gameWordHidden);
+// 			//This logs the fact that the user has already guessed that particular letter
+// 			console.log("You have already guessed this")
+// 		}//Ends the original IF/ELSE statement
+
+// 		//Show's the user's guess (This key had not been pressed before this guess)
+// 		console.log(theChoice);
+// 		//Calculates how many guesses are left (Indicates that this key had not been pressed before this guess.) 
+// 		lettersLeft--;
+// 		//This reveals how many guesses are left (Only appears after a letter has been guessed for the first time.)
+// 		$("#guessesRemaining").html("Guesses remaining: " + lettersLeft);
+// 		console.log("Guesses remaining: " + lettersLeft);
+			
+			
+// 		//THIS REGARDS THE COUNTDOWN
+// 		//NEW STANDALONE IF STATEMENT... If the number of guesses has reached 0 (or less)...
+// 		if (lettersLeft <= 0) {
+// 				//When the number of guesses remaining reaches 0 (or less), a losing message will be logged
+// 				console.log("You lose. Start over.");
+// 				//When the number of guesses remaining reaches 0 (or less), the user will be alerted
+// 				confirm("You lose. Would you like to play again?");
+// 				//When the user confirms the loss, the page will reload so that the game can begin again
+// 				window.location.reload();
+// 		//If the number of remaining guesses is still higher than 0...		
+// 		} else {
+// 			//Logs how many guesses are remaining. Because apparantley there are some.
+// 			$("#guessesRemaining").html("Guesses remaining: " + lettersLeft);
+// 			console.log("Guesses remaining: " + lettersLeft);
+
+// 		}//Ends the second IF/ELSE statement in the guessedLetters function. As stated, it regards the countdown.
+
+// 		//This adds every letter that the user guesses into an array that is used to check if the user has guessed a particular letter before.
+// 		previouslyGuessed.push(theChoice);
+// 		if(previouslyGuessed.indexOf(theChoice)){
+// 			$("#alreadyGuessed").html(previouslyGuessed + " ");
+// 		}
+
+// 	}//Ends the guessedLetters function
+
+// 	//Calls the guessedLetters function with an argument of the user's guess
+// 	guessedLetters(userGuess);
+
+// }//Ends the onKeyUp function
 
 
 	
@@ -150,7 +241,7 @@ document.onkeyup = function(event) {
 
 		<div class=" text-center col-xs-12 col-sm-12 col-md-12 col-lg-12"><!--Title columns-->
 
-			<h1>Guess the movie. Or hang.</h1>
+			<h1 id="theTitle">Guess the movie. Or hang.</h1>
 
 		</div><!--End Title columns-->
 
@@ -158,9 +249,9 @@ document.onkeyup = function(event) {
 
 	<div class="row"><!--Begin row for the subtitle-->
 
-		<div class=" text-center col-xs-12 col-sm-12 col-md-12 col-lg-12"><!--Title columns-->
+		<div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12"><!--Title columns-->
 
-			<h2>Press any key to make your first guess</h2>
+			<h2 id="tagline">Press any key to make your first guess</h2>
 
 		</div><!--End Subtitle columns-->
 
@@ -170,24 +261,18 @@ document.onkeyup = function(event) {
 
 		<div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12"><!--Title columns-->
 
-			<h3 id="wins">Wins:</h3>
+			<h3 id="wins"></h3>
 
 		</div><!--wins columns-->
 
 	</div><!--End wins row-->
 
 	<div class="row"><!--Begin row for the game content box-->
-		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
-		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><!--Game content box columns-->
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><!--Game content box columns-->
 
 			<div class="row">
 
-				<div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-					<h3>Guess the word!</h3>
-
-				</div>
+				<div id="filler" class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 			</div>
 
@@ -195,12 +280,18 @@ document.onkeyup = function(event) {
 
 				<div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-					<h4 id="currentWord">Make your first guess...</h4>
+					<h4 id="currentWord">Go on, guess...</h4>
 
 				</div>
 
 			</div>
 
+			<div class="row">
+
+				<div id="filler" class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+			</div>
+			
 			<div class="row">
 
 				<div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -213,16 +304,21 @@ document.onkeyup = function(event) {
 
 			<div class="row">
 
+				<div id="filler" class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+			</div>
+
+			<div class="row">
+
 				<div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-					<h4 id="alreadyGuessed">Letters you've already guessed:</h4>
+					<h4 id="alreadyGuessed">Letters you've already guessed</h4>
 
 				</div>
 
 			</div>
 
 		</div><!--End game content box columns-->
-		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
 
 	</div><!--End row for the game content box-->
 
